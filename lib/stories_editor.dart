@@ -94,6 +94,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
+      //변화가 발생할때 제공되는 프로바이더
       providers: [
         ChangeNotifierProvider(create: (_) => ControlNotifier()),
         ChangeNotifierProvider(create: (_) => ScrollNotifier()),

@@ -185,6 +185,7 @@ class _MainViewState extends State<MainView> {
         //     );
         //   }
         // }
+        //stories_editor에서 제공된 프로바이더에 대한 컨슈머
         child: Consumer6<
             ControlNotifier,
             DraggableWidgetNotifier,

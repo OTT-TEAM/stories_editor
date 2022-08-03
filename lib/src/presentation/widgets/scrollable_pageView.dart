@@ -90,6 +90,9 @@ class _ScrollablePageViewState extends State<ScrollablePageView> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {});
+    //사용자 정의의 제스쳐를 인식할때 사용.
+    //일반적인 제스쳐는 GestureRecognizer를 사용
+    //제스쳐 팩토리에 의해 묘사된 제스쳐를 탐지하는 위젯
     return RawGestureDetector(
         gestures: <Type, GestureRecognizerFactory>{
           VerticalDragGestureRecognizer: GestureRecognizerFactoryWithHandlers<
@@ -116,6 +119,8 @@ class _ScrollablePageViewState extends State<ScrollablePageView> {
         child: PageView(
           controller: _pageController,
           scrollDirection: Axis.vertical,
+          //사용자의 스크롤을 방지하기 위해
+          //physics: 어떻게 사용자의 인풋에 대해서 PageView가 응답하는지 나타냄
           physics: const NeverScrollableScrollPhysics(),
           children: [widget.mainView, widget.gallery],
         ));
