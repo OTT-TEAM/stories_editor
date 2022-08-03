@@ -223,15 +223,18 @@ class _MainViewState extends State<MainView> {
                             ///gradient container
                             /// this container will contain all widgets(image/texts/draws/sticker)
                             /// wrap this widget with coloredFilter
+                            /// InkWell과의 차이점은 사용자의 동작을 감지 시 별도의 애니메이션 효과가 없음
                             GestureDetector(
                               onScaleStart: _onScaleStart,
                               onScaleUpdate: _onScaleUpdate,
                               onTap: () {
+                                //탭할경우 텍스트 편집상태를 반대로
                                 controlNotifier.isTextEditing =
                                     !controlNotifier.isTextEditing;
                               },
                               child: Align(
                                 alignment: Alignment.topCenter,
+                                //모서리가 둥근 네모
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(25),
                                   child: SizedBox(
@@ -244,11 +247,13 @@ class _MainViewState extends State<MainView> {
                                       controller: _recorderController,
                                       child: RepaintBoundary(
                                         key: contentKey,
+                                        //애니메이션 처리가된 컨테이너
                                         child: AnimatedContainer(
                                           duration:
                                               const Duration(milliseconds: 200),
                                           decoration: BoxDecoration(
                                               //borderRadius: BorderRadius.circular(25),
+                                            //미디어가 선택된게 없을 경우
                                               gradient: controlNotifier
                                                       .mediaPath.isEmpty
                                                   ? LinearGradient(
@@ -278,6 +283,7 @@ class _MainViewState extends State<MainView> {
                                               children: [
                                                 /// in this case photo view works as a main background container to manage
                                                 /// the gestures of all movable items.
+                                                /// zoom 가능한 이미지 표시
                                                 PhotoView.customChild(
                                                   child: Container(),
                                                   backgroundDecoration:
@@ -287,6 +293,8 @@ class _MainViewState extends State<MainView> {
                                                 ),
 
                                                 ///list items
+                                                ///펼치기 연산자
+                                                // ...?일 경우 null 인지
                                                 ...itemProvider.draggableWidget
                                                     .map((editableItem) =>
                                                         DraggableWidget(

@@ -166,6 +166,7 @@ class ScreenRecorder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //화면캡쳐할때 쓰는 위젯
     return RepaintBoundary(
       key: controller._containerKey,
       child: child,
