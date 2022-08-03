@@ -112,6 +112,7 @@ class _ScrollablePageViewState extends State<ScrollablePageView> {
           })
         },
         behavior: HitTestBehavior.opaque,
+        //여러페이지를 한 화면에서 처리하기 위한 PageView
         child: PageView(
           controller: _pageController,
           scrollDirection: Axis.vertical,

@@ -114,6 +114,7 @@ class _MainViewState extends State<MainView> {
 
   @override
   void initState() {
+    //페이지 빌드 후에 비동기로 콜백함수를 호출
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       var _control = Provider.of<ControlNotifier>(context, listen: false);
 
@@ -141,12 +142,49 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    //취소키를 눌러도 뒤로 가지 않는다.
     return WillPopScope(
       onWillPop: _popScope,
       child: Material(
         color: widget.editorBackgroundColor == Colors.transparent
             ? Colors.black
             : widget.editorBackgroundColor ?? Colors.black,
+        //context.watch<T>(), context.read<T>를 통해 Provider의 데이터를 사용할 수 있음
+        //context.watch<T>()의 경우, T의 데이터 값을 화면에 보여주는 용도, 위젯을 재빌드
+        //context.read<T>()의 경우, T의 데이터 값을 변경하는 등의 이벤트 처리, 위젯을 재빌드 하지 않음
+        //context.watch<T>()는 Provider.of<T>(context)와 동일
+        //context.read<T>()는 Provider.of<T>(context, listen: false)와 동일
+        //consumer는 watch, read를 사용할 수 없을때 사용
+        //하나의 build 메소드에서 Provider를 생성도 하고 소비도 해야하는 상황
+        //이럴 경우 Consumer를 사용하여 Provider를 소비할 수 있다.
+        // class ExampleApp extends StatelessWidget {
+        //   @override
+        //   Widget build(BuildContext context) {
+        //     return ChangeNotifierProvider<Counter>(
+        //       create: (_) => Counter(),
+        //         child: MaterialApp(
+        //           title: 'Provider Example',
+        //             home: Scaffold(
+        //               appBar: AppBar(
+        //                 title: Text('Provider Example'),
+        //                 ),
+        //                 body: Center(
+        //                 child: Consumer<Counter>( // Consumer를 사용하여 ElevatedButton을 감쌌다.
+        //                   builder: (_, counter, __) => ElevatedButton(
+        //                   child: Text(
+        //                   '현재 숫자: ${counter.count}',
+        //                 ),
+        //                 onPressed: () {
+        //                   counter.increment();
+        //                 },
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     );
+        //   }
+        // }
         child: Consumer6<
             ControlNotifier,
             DraggableWidgetNotifier,
@@ -154,9 +192,13 @@ class _MainViewState extends State<MainView> {
             GradientNotifier,
             PaintingNotifier,
             TextEditingNotifier>(
+          //Conuser6의 타겟을 builder에서 받는다.(context, child 고정)
           builder: (context, controlNotifier, itemProvider, scrollProvider,
               colorProvider, paintingProvider, editingProvider, child) {
+            //RenderingNotifier에 대한 컨슈머
             return Consumer<RenderingNotifier>(
+              //컨슈머에서 쓰는 관용적 표현
+              //renderingNotifier는 Provider<RenderingNotifier>의 컨슈머
               builder: (_, renderingNotifier, __) {
                 return SafeArea(
                   //top: false,

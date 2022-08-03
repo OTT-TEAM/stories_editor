@@ -71,7 +71,10 @@ class StoriesEditor extends StatefulWidget {
 class _StoriesEditorState extends State<StoriesEditor> {
   @override
   void initState() {
+    //이미지를 그릴 때 출력을 디더링할지
+    //그라데이션이 더 부드럽게 보이도록 셰이더의 디더링도 제어
     Paint.enableDithering = true;
+    //runApp 메소드의 시작 지점에서 Flutter 엔진과 위젯의 바인딩이 미리 완료되어 있게 만들어줌
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
