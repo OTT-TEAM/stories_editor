@@ -11,6 +11,7 @@ class ScrollNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  //어떤 페이지가 PageView에서 활성화 되어 있는지 처리
   PageController _pageController = PageController();
   PageController get pageController => _pageController;
   set pageController(PageController value) {

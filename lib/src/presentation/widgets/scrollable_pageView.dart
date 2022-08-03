@@ -100,6 +100,7 @@ class _ScrollablePageViewState extends State<ScrollablePageView> {
               () => VerticalDragGestureRecognizer(),
               (VerticalDragGestureRecognizer instance) {
             if (widget.scrollPhysics) {
+              //같은 인스턴스에 복수의 메소드를 수행할때(..)
               instance
                 ..onStart = _handleDragStart
                 ..onUpdate = _handleDragUpdate

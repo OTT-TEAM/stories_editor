@@ -206,9 +206,14 @@ class _MainViewState extends State<MainView> {
                   child: Stack(
                     children: [
                       ScrollablePageView(
-                        scrollPhysics: controlNotifier.mediaPath.isEmpty &&
+                        scrollPhysics:
+                            //미디어가 선택되지 않았고
+                            controlNotifier.mediaPath.isEmpty &&
+                            //드래그 위젯이 아니고
                             itemProvider.draggableWidget.isEmpty &&
+                            //그리는 상태가 아니고
                             !controlNotifier.isPainting &&
+                            //텍스트 편집상태가 아닐 경우
                             !controlNotifier.isTextEditing,
                         pageController: scrollProvider.pageController,
                         gridController: scrollProvider.gridController,
