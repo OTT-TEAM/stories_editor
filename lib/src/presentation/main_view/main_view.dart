@@ -295,6 +295,7 @@ class _MainViewState extends State<MainView> {
                                                 ///list items
                                                 ///펼치기 연산자
                                                 // ...?일 경우 null 인지
+                                                //드래그 가능한 위젯이겠지?
                                                 ...itemProvider.draggableWidget
                                                     .map((editableItem) =>
                                                         DraggableWidget(
@@ -325,6 +326,7 @@ class _MainViewState extends State<MainView> {
                                                         )),
 
                                                 /// finger paint
+                                                //포인터 움직임을 무신할때
                                                 IgnorePointer(
                                                   ignoring: true,
                                                   child: Align(
@@ -347,6 +349,8 @@ class _MainViewState extends State<MainView> {
                                                                   .size
                                                                   .height -
                                                               132,
+
+                                                          //비동기로 이벤트등을 수신할 경우 StreamBuilder를 사용
                                                           child: StreamBuilder<
                                                               List<
                                                                   PaintingModel>>(
@@ -355,6 +359,7 @@ class _MainViewState extends State<MainView> {
                                                                 .stream,
                                                             builder: (context,
                                                                 snapshot) {
+                                                              //Canvas 처럼 페인트를 가지고 그릴때
                                                               return CustomPaint(
                                                                 painter:
                                                                     Sketcher(
@@ -382,7 +387,9 @@ class _MainViewState extends State<MainView> {
                             ),
 
                             /// middle text
+                            // 드래그 가능한 위젯이 없고
                             if (itemProvider.draggableWidget.isEmpty &&
+                                //텍스트 편집 상태가 아니고
                                 !controlNotifier.isTextEditing &&
                                 paintingProvider.lines.isEmpty)
                               IgnorePointer(
@@ -392,6 +399,7 @@ class _MainViewState extends State<MainView> {
                                   child: Text('Tap to type',
                                       style: TextStyle(
                                           fontFamily: 'Alegreya',
+                                          //pubspect에 적용된 fontfamily 사용
                                           package: 'stories_editor',
                                           fontWeight: FontWeight.w500,
                                           fontSize: 30,

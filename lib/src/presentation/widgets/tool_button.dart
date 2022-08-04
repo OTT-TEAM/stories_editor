@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
 
+//버튼을 나타내는 위젯
 class ToolButton extends StatelessWidget {
   final Function() onTap;
   final Widget child;
@@ -40,6 +41,7 @@ class ToolButton extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: colorBorder, width: 2)),
               child: Transform.scale(
+                //애니메이션 효과 점점 커지게, 0.8만큼 작아지게 하는 듯?
                 scale: 0.8,
                 child: child,
               ),
