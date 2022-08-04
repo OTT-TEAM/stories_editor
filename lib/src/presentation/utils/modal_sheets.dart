@@ -47,6 +47,7 @@ Future<bool> exitDialog({required context, required contentKey}) async {
           backgroundColor: Colors.transparent,
           elevation: 0,
           insetAnimationDuration: const Duration(milliseconds: 300),
+          //시스템 키보드가 다이얼로그 있는 공간에 침입할 때 표시되는 애니메이션에 사용되는 곡선
           insetAnimationCurve: Curves.ease,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
