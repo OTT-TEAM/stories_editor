@@ -66,6 +66,8 @@ class MainView extends StatefulWidget {
   /// gallery thumbnail quality
   final int? galleryThumbnailQuality;
 
+  final String? initText;
+
   /// editor custom color palette list
   List<Color>? colorList;
   MainView(
@@ -80,7 +82,8 @@ class MainView extends StatefulWidget {
       this.onBackPress,
       this.onDoneButtonStyle,
       this.editorBackgroundColor,
-      this.galleryThumbnailQuality})
+      this.galleryThumbnailQuality,
+      this.initText})
       : super(key: key);
 
   @override
@@ -132,16 +135,21 @@ class _MainViewState extends State<MainView> {
         _control.colorList = widget.colorList;
       }
     });
+    _initTextParam(context, widget.initText);
+    super.initState();
+  }
+
+  void _initTextParam(context, text) {
     final _editableItemNotifier =
-      Provider.of<DraggableWidgetNotifier>(context, listen: false);
+    Provider.of<DraggableWidgetNotifier>(context, listen: false);
     final _textEditingNotifier =
-      Provider.of<TextEditingNotifier>(context, listen: false);
+    Provider.of<TextEditingNotifier>(context, listen: false);
     final _controlNotifier  =
-      Provider.of<ControlNotifier>(context, listen: false);
+    Provider.of<ControlNotifier>(context, listen: false);
 
     _editableItemNotifier.draggableWidget.add(EditableItem()
       ..type = ItemType.text
-      ..text = '기쁨(JOY)'
+      ..text = text
       ..backGroundColor = _textEditingNotifier.backGroundColor
       ..textColor = _controlNotifier.colorList![_textEditingNotifier.textColor]
       ..fontFamily = _textEditingNotifier.fontFamilyIndex
@@ -153,9 +161,6 @@ class _MainViewState extends State<MainView> {
       _textEditingNotifier.animationList[_textEditingNotifier.fontAnimationIndex]
       ..position = const Offset(0.0, 0.0));
     _textEditingNotifier.setDefaults();
-    // _controlNotifier.isTextEditing = !_controlNotifier.isTextEditing;
-
-    super.initState();
   }
 
   @override
