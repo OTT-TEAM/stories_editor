@@ -132,6 +132,29 @@ class _MainViewState extends State<MainView> {
         _control.colorList = widget.colorList;
       }
     });
+    final _editableItemNotifier =
+      Provider.of<DraggableWidgetNotifier>(context, listen: false);
+    final _textEditingNotifier =
+      Provider.of<TextEditingNotifier>(context, listen: false);
+    final _controlNotifier  =
+      Provider.of<ControlNotifier>(context, listen: false);
+
+    _editableItemNotifier.draggableWidget.add(EditableItem()
+      ..type = ItemType.text
+      ..text = '기쁨(JOY)'
+      ..backGroundColor = _textEditingNotifier.backGroundColor
+      ..textColor = _controlNotifier.colorList![_textEditingNotifier.textColor]
+      ..fontFamily = _textEditingNotifier.fontFamilyIndex
+      ..fontSize = _textEditingNotifier.textSize
+      ..fontAnimationIndex = _textEditingNotifier.fontAnimationIndex
+      ..textAlign = _textEditingNotifier.textAlign
+      ..textList = _textEditingNotifier.textList
+      ..animationType =
+      _textEditingNotifier.animationList[_textEditingNotifier.fontAnimationIndex]
+      ..position = const Offset(0.0, 0.0));
+    _textEditingNotifier.setDefaults();
+    // _controlNotifier.isTextEditing = !_controlNotifier.isTextEditing;
+
     super.initState();
   }
 
