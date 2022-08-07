@@ -49,7 +49,9 @@ class StoriesEditor extends StatefulWidget {
   /// gallery thumbnail quality
   final int? galleryThumbnailQuality;
 
-  final String? initText;
+  final String initText;
+
+  final String initBackgroundImage;
 
   const StoriesEditor(
       {Key? key,
@@ -64,7 +66,8 @@ class StoriesEditor extends StatefulWidget {
       this.onDoneButtonStyle,
       this.editorBackgroundColor,
       this.galleryThumbnailQuality,
-      this.initText})
+      required this.initText,
+      required this.initBackgroundImage})
       : super(key: key);
 
   @override
@@ -120,6 +123,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
         editorBackgroundColor: widget.editorBackgroundColor,
         galleryThumbnailQuality: widget.galleryThumbnailQuality,
         initText: widget.initText,
+        initBackgroundImage: widget.initBackgroundImage
       ),
     );
   }

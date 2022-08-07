@@ -66,24 +66,29 @@ class MainView extends StatefulWidget {
   /// gallery thumbnail quality
   final int? galleryThumbnailQuality;
 
-  final String? initText;
+  final String initText;
+
+  final String initBackgroundImage;
 
   /// editor custom color palette list
   List<Color>? colorList;
   MainView(
-      {Key? key,
-      required this.giphyKey,
-      required this.onDone,
-      this.middleBottomWidget,
-      this.colorList,
-      this.isCustomFontList,
-      this.fontFamilyList,
-      this.gradientColors,
-      this.onBackPress,
-      this.onDoneButtonStyle,
-      this.editorBackgroundColor,
-      this.galleryThumbnailQuality,
-      this.initText})
+      {
+        Key? key,
+        required this.giphyKey,
+        required this.onDone,
+        this.middleBottomWidget,
+        this.colorList,
+        this.isCustomFontList,
+        this.fontFamilyList,
+        this.gradientColors,
+        this.onBackPress,
+        this.onDoneButtonStyle,
+        this.editorBackgroundColor,
+        this.galleryThumbnailQuality,
+        required this.initText,
+        required this.initBackgroundImage
+      })
       : super(key: key);
 
   @override
@@ -257,8 +262,9 @@ class _MainViewState extends State<MainView> {
                               onScaleUpdate: _onScaleUpdate,
                               onTap: () {
                                 //탭할경우 텍스트 편집상태를 반대로
-                                controlNotifier.isTextEditing =
-                                    !controlNotifier.isTextEditing;
+                                // controlNotifier.isTextEditing =
+                                //     !controlNotifier.isTextEditing;
+                                controlNotifier.isTextEditing = false;
                               },
                               child: Align(
                                 alignment: Alignment.topCenter,
@@ -279,30 +285,34 @@ class _MainViewState extends State<MainView> {
                                         child: AnimatedContainer(
                                           duration:
                                               const Duration(milliseconds: 200),
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.contain,
+                                              image: NetworkImage("https://picsum.photos/seed/picsum/200/300")
+                                            )
                                               //borderRadius: BorderRadius.circular(25),
                                             //미디어가 선택된게 없을 경우
-                                              gradient: controlNotifier
-                                                      .mediaPath.isEmpty
-                                                  ? LinearGradient(
-                                                      colors: controlNotifier
-                                                              .gradientColors![
-                                                          controlNotifier
-                                                              .gradientIndex],
-                                                      begin: Alignment.topLeft,
-                                                      end:
-                                                          Alignment.bottomRight,
-                                                    )
-                                                  : LinearGradient(
-                                                      colors: [
-                                                        colorProvider.color1,
-                                                        colorProvider.color2
-                                                      ],
-                                                      begin:
-                                                          Alignment.topCenter,
-                                                      end: Alignment
-                                                          .bottomCenter,
-                                                    )),
+                                              // gradient: controlNotifier
+                                              //         .mediaPath.isEmpty
+                                              //     ? LinearGradient(
+                                              //         colors: controlNotifier
+                                              //                 .gradientColors![
+                                              //             controlNotifier
+                                              //                 .gradientIndex],
+                                              //         begin: Alignment.topLeft,
+                                              //         end:
+                                              //             Alignment.bottomRight,
+                                              //       )
+                                              //     : LinearGradient(
+                                              //         colors: [
+                                              //           colorProvider.color1,
+                                              //           colorProvider.color2
+                                              //         ],
+                                              //         begin:
+                                              //             Alignment.topCenter,
+                                              //         end: Alignment
+                                              //             .bottomCenter,
+                                                     ),
                                           child: GestureDetector(
                                             onScaleStart: _onScaleStart,
                                             onScaleUpdate: _onScaleUpdate,
@@ -312,13 +322,13 @@ class _MainViewState extends State<MainView> {
                                                 /// in this case photo view works as a main background container to manage
                                                 /// the gestures of all movable items.
                                                 /// zoom 가능한 이미지 표시
-                                                PhotoView.customChild(
-                                                  child: Container(),
-                                                  backgroundDecoration:
-                                                      const BoxDecoration(
-                                                          color: Colors
-                                                              .transparent),
-                                                ),
+                                                // PhotoView.customChild(
+                                                //   child: Container(),
+                                                //   backgroundDecoration:
+                                                //       const BoxDecoration(
+                                                //           color: Colors
+                                                //               .transparent),
+                                                // ),
 
                                                 ///list items
                                                 ///펼치기 연산자
@@ -420,27 +430,27 @@ class _MainViewState extends State<MainView> {
                                 //텍스트 편집 상태가 아니고
                                 !controlNotifier.isTextEditing &&
                                 paintingProvider.lines.isEmpty)
-                              IgnorePointer(
-                                ignoring: true,
-                                child: Align(
-                                  alignment: const Alignment(0, -0.1),
-                                  child: Text('Tap to type',
-                                      style: TextStyle(
-                                          fontFamily: 'Alegreya',
-                                          //pubspect에 적용된 fontfamily 사용
-                                          package: 'stories_editor',
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 30,
-                                          color: Colors.white.withOpacity(0.5),
-                                          shadows: <Shadow>[
-                                            Shadow(
-                                                offset: const Offset(1.0, 1.0),
-                                                blurRadius: 3.0,
-                                                color: Colors.black45
-                                                    .withOpacity(0.3))
-                                          ])),
-                                ),
-                              ),
+                              // IgnorePointer(
+                              //   ignoring: true,
+                              //   child: Align(
+                              //     alignment: const Alignment(0, -0.1),
+                              //     child: Text('Tap to type',
+                              //         style: TextStyle(
+                              //             fontFamily: 'Alegreya',
+                              //             //pubspect에 적용된 fontfamily 사용
+                              //             package: 'stories_editor',
+                              //             fontWeight: FontWeight.w500,
+                              //             fontSize: 30,
+                              //             color: Colors.white.withOpacity(0.5),
+                              //             shadows: <Shadow>[
+                              //               Shadow(
+                              //                   offset: const Offset(1.0, 1.0),
+                              //                   blurRadius: 3.0,
+                              //                   color: Colors.black45
+                              //                       .withOpacity(0.3))
+                              //             ])),
+                              //   ),
+                              // ),
 
                             /// top tools
                             Visibility(
@@ -466,26 +476,27 @@ class _MainViewState extends State<MainView> {
                               isDeletePosition: _isDeletePosition,
                             ),
 
+                            //하단툴을 disable
                             /// bottom tools
-                            if (!kIsWeb)
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: BottomTools(
-                                  contentKey: contentKey,
-                                  renderWidget: () => startRecording(
-                                      controlNotifier: controlNotifier,
-                                      renderingNotifier: renderingNotifier,
-                                      saveOnGallery: false),
-                                  onDone: (bytes) {
-                                    setState(() {
-                                      widget.onDone!(bytes);
-                                    });
-                                  },
-                                  onDoneButtonStyle: widget.onDoneButtonStyle,
-                                  editorBackgroundColor:
-                                      widget.editorBackgroundColor,
-                                ),
-                              ),
+                            // if (!kIsWeb)
+                            //   Align(
+                            //     alignment: Alignment.bottomCenter,
+                            //     child: BottomTools(
+                            //       contentKey: contentKey,
+                            //       renderWidget: () => startRecording(
+                            //           controlNotifier: controlNotifier,
+                            //           renderingNotifier: renderingNotifier,
+                            //           saveOnGallery: false),
+                            //       onDone: (bytes) {
+                            //         setState(() {
+                            //           widget.onDone!(bytes);
+                            //         });
+                            //       },
+                            //       onDoneButtonStyle: widget.onDoneButtonStyle,
+                            //       editorBackgroundColor:
+                            //           widget.editorBackgroundColor,
+                            //     ),
+                            //   ),
 
                             /// show text editor
                             Visibility(

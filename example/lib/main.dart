@@ -98,6 +98,8 @@ class _ExampleState extends State<Example> {
                             giphyKey: '[HERE YOU GIPHY API KEY]',
                             //fontFamilyList: const ['Shizuru', 'Aladin'],
                             galleryThumbnailQuality: 300,
+                            initText: "Test",
+                            initBackgroundImage: 'Test',
                             editorBackgroundColor: colors[colorIndex],
                             //isCustomFontList: true,
                             onDone: (uri) {
