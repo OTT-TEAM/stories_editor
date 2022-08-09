@@ -24,6 +24,9 @@ class FontSelector extends StatelessWidget {
               editorNotifier.fontFamilyIndex = index;
               HapticFeedback.heavyImpact();
             },
+            //커스텀 스크롤 동작을 정의
+            //스크롤 오프셋이 컨텐츠의 범위를 벗어나도록 허용하지만
+            //컨텐츠를 해당 범위의 가장자리로 다시 바운스 할 수 있는 환경에 대한 스크롤 물리
             physics: const BouncingScrollPhysics(),
             allowImplicitScrolling: true,
             pageSnapping: false,

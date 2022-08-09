@@ -271,6 +271,9 @@ class _MainViewState extends State<MainView> {
                                 //모서리가 둥근 네모
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(25),
+                                  //Container와 SizedBox 위젯은 둘 다 width와 height를 가짐
+                                  //Container 위젯은 width와 height를 넣지 않으면 최대 크기로 확장
+                                  //SizedBox 위젯은 width와 height 둘 중 하나라도 설정하지 않으면 크기는 child에 맞게 설정
                                   child: SizedBox(
                                     width: _screenSize.size.width,
                                     height: Platform.isIOS

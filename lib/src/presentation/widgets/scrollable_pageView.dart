@@ -43,10 +43,20 @@ class _ScrollablePageViewState extends State<ScrollablePageView> {
   }
 
   void _handleDragStart(DragStartDetails details) {
+    //ScrollPosition 객체가 Attach 메소드를 사용하여
+    //ScrollController에 연결되었는지 여부
+    //이 값이 false이면 position, offset, animateTo 및 JumpTo와 같이
+    //ScrollPosition과 상호 작용하는 멤버를 호출해서는 안된다.
     if (_listScrollController!.hasClients) {
+      //스크롤 가능한 위젯 자체의 컨텍스트
+      //스크롤 위젯 작성의 일부로 동적으로 생성되는 모든 글로벌 키가 포함되어야 함
+      //PageStorage를 찾기 위한 빌드컨텍스트를 위해 사용된다.
+      //현재 스크롤 컨트롤러의 포지션의 컨텍스트에 있는 Render Object
+      //2D 좌표 객체
       final RenderBox renderBox = _listScrollController!
           .position.context.storageContext
           .findRenderObject() as RenderBox;
+      //paintBounds : 박스에 의해 그려전 모든 픽셀 사각형을 반환
       if (renderBox.paintBounds
           .shift(renderBox.localToGlobal(Offset.zero))
           .contains(details.globalPosition)) {
