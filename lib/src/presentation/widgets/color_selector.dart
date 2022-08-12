@@ -17,6 +17,10 @@ class ColorSelector extends StatelessWidget {
         return Container(
           height: _size.width * 0.1,
           width: _size.width,
+          //컨테이너 안에 있는 child를 정렬한다.
+          //null이 아닌 경우 컨테이너는 정해진 값에 따라 부모만큼 채운다.
+          //그리고 child를 해당 값으로 포지셔닝
+          //하위항목이 null일 경우 무시
           alignment: Alignment.center,
           padding: const EdgeInsets.only(left: 5, right: 5),
           child: Row(
@@ -51,6 +55,15 @@ class ColorSelector extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   itemCount: controlProvider.colorList!.length,
+                  //ListView외에 다른 위젯이 같은 스크린 내에 있을 시에는 shrinkWrap을 true로 하거나
+                  //Flexible, Expanded, Sizedbox와 같은 크기를 제어할 수 있는 widget을 사용해서 크기를 제어
+                  //shirnkwrap을 true로 하면 ListView 내에서만 스크롤이 됨
+                  //Usually a ListView (as well as GridView, PageView and CustomScrollView) tries to fill all the available space given by the parent element, even when the list items would require less space.
+                  //With shrinkWrap: true, you can change this behavior so that the ListView only occupies the space it needs (it will still scroll when there more items).
+                  //Expanded - it is Flexible with set fit
+                  // Expanded - Flexible.tight
+                  // FlexFit.tight = 최대한 많은 공간을 확보하면서 부모에게 꼭 맞기를 원합니다.
+                  // FlexFit.loose = 스스로 공간을 최대한 줄이면서 부모에게 느슨하게 맞추려고 합니다.
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {

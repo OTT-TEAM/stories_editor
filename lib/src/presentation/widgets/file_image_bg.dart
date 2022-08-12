@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:stories_editor/src/presentation/utils/color_detection.dart';
 
+//파일 이미지 백그라운드 위젯
 class FileImageBG extends StatefulWidget {
   final File? filePath;
   final void Function(Color color1, Color color2) generatedGradient;
@@ -27,7 +28,9 @@ class _FileImageBGState extends State<FileImageBG> {
   @override
   void initState() {
     currentKey = paintKey;
+    //0.5초에 한번씩 함수 호출
     Timer.periodic(const Duration(milliseconds: 500), (callback) async {
+      //높이가 0이라면 무시하고
       if (imageKey.currentState!.context.size!.height == 0.0) {
       } else {
         var cd1 = await ColorDetection(

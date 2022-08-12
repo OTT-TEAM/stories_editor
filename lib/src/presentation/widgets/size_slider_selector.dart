@@ -25,11 +25,13 @@ class _SizeSliderWidgetState extends State<SizeSliderWidget> {
           alignment: Alignment.center,
           children: [
             /// custom paint
+            /// Container 위젯에 애니메이션이 추가
             AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 padding: EdgeInsets.only(right: _isChange ? 0 : 15),
                 width: _isChange ? 39 : 10,
                 height: 300,
+                //페인트 단계에서 그릴 캔버스를 제공하는 위젯
                 child: CustomPaint(
                   painter: RPSCustomPainter(),
                   size: Size(_size.height, (_size.width).toDouble()),
@@ -42,7 +44,9 @@ class _SizeSliderWidgetState extends State<SizeSliderWidget> {
               width: _isChange ? 39 : 15,
               height: 300,
               decoration: const BoxDecoration(),
+              //회전하는 박스 위젯
               child: RotatedBox(
+                //1에 90도 270도 회전하는 박스
                 quarterTurns: 3,
                 child: Stack(
                   alignment: Alignment.center,
