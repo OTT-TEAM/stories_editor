@@ -16,6 +16,15 @@ class Sketcher extends CustomPainter {
     for (int i = 0; i < lines.length; ++i) {
       switch (lines[i].paintingType) {
         case PaintingType.pen:
+          //querySelector('#confirm') // Get an object.
+        //   ..text = 'Confirm' // Use its members.
+        //   ..classes.add('important')
+        //   ..onClick.listen((e) => window.alert('Confirmed!'));
+        // 와 같은 문법
+        //   var button = querySelector('#confirm');
+        //   button.text = 'Confirm';
+        //   button.classes.add('important');
+        //   button.onClick.listen((e) => window.alert('Confirmed!'));
           paint = Paint()..color = lines[i].lineColor;
 
           outlinePoints = getStroke(
@@ -27,9 +36,11 @@ class Sketcher extends CustomPainter {
               size: lines[i].size,
 
               /// line thin
+              /// The effect of pressure on the stroke's size.
               thinning: 1,
 
               /// line smooth
+              /// 스트로크의 가장자리를 부드럽게 하는 정도.
               smoothing: 1,
 
               /// on complete line
